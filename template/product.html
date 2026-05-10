@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artwork Details | Deathhat Art Collection</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: rgba(255,255,255,0.9);
+      max-width: 720px;
+      margin: 2rem auto;
+      padding: 1rem;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(106, 13, 173, 0.3);
+      color: #333;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      color: #6a0dad;
+      margin-bottom: 0.6rem;
+      font-family: 'Poppins', sans-serif;
+    }
+    p {
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    p.price {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #222;
+      margin-bottom: 1.2rem;
+    }
+    a.btn-buy {
+      background: linear-gradient(45deg, #6a0dad, #c4a3f7);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 25px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      user-select: none;
+    }
+    a.btn-buy:hover {
+      background: linear-gradient(135deg, #c4a3f7, #6a0dad);
+    }
+  </style>
+</head>
+<body>
+
+<img id="artImage" src="" alt="Artwork" />
+<h1 id="artTitle">Loading...</h1>
+<p id="artDesc"></p>
+<p id="artPrice" class="price"></p>
+<a id="buyBtn" href="#" class="btn-buy" target="_self">Buy Now</a>
+
+<script>
+  function getQueryParams() {
+    const params = {};
+    location.search.substring(1).split("&").forEach(pair => {
+      const [key, value] = pair.split("=");
+      params[key] = decodeURIComponent(value || "");
+    });
+    return params;
+  }
+
+  const params = getQueryParams();
+  document.getElementById("artImage").src = params.image || "";
+  document.getElementById("artImage").alt = params.title || "Artwork";
+  document.getElementById("artTitle").textContent = params.title || "Artwork Title";
+  document.getElementById("artDesc").textContent = params.desc || "Artwork description not available.";
+  document.getElementById("artPrice").textContent = params.price ? `Price: $${params.price}` : "";
+
+  const buyBtn = document.getElementById("buyBtn");
+  if(params.title && params.image){
+    buyBtn.href = `checkout.html?title=${encodeURIComponent(params.title)}&image=${encodeURIComponent(params.image)}&price=${encodeURIComponent(params.price)}`;
+  } else {
+    buyBtn.style.display = "none";
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Collaborate | Deathhat Art Collection</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url("../images/background2.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      min-height: 100vh;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      color: #0dad70;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #a3f7de;
+    }
+    nav {
+      background:#0dad55;
+      padding: 1rem;
+      text-align: center;
+      opacity: 0.94;
+      position: relative;
+    }
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      text-decoration: none;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    header {
+      background-color: rgba(31, 41, 55, 0.89);
+      color: #f9fafb;
+      text-align: center;
+      padding: 2rem 1rem;
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.15);
+      margin-bottom: 2rem;
+      border-radius: 0 0 24px 24px;
+      opacity: 0.98;
+    }
+    header h1 {
+      font-weight: 900;
+      font-size: 3rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.25rem;
+      font-family: 'Brush Script MT', cursive;
+      text-shadow: 0 2px 5px rgba(13, 173, 93, 0.7);
+    }
+    header p {
+      font-weight: 400;
+      font-size: 1.25rem;
+      letter-spacing: 0.7px;
+      opacity: 0.85;
+      font-style: italic;
+    }
+    main {
+      flex-grow: 1;
+      max-width: 960px;
+      margin: 2.5rem auto;
+      padding: 0 1rem;
+      background: rgba(255,255,255,0.77);
+      border-radius: 20px;
+      box-shadow: 0 6px 30px rgba(13, 173, 93, 0.08);
+    }
+    h2 {
+      font-size: 2.5rem;
+      color: #1f2937;
+      border-left: 6px solid #0dad62;
+      padding-left: 0.75rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+    }
+    p.lead {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: #555;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto 3rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(106, 13, 173, 0.15);
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #0dad7d;
+      font-family: 'Poppins', sans-serif;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 12px;
+      border: 2px solid #d8c8fa;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, textarea:focus {
+      border-color: #0dad6d;
+      outline: none;
+      box-shadow: 0 0 10px rgba(13, 173, 69, 0.5);
+    }
+    button.submit-btn {
+      background: linear-gradient(45deg, #0dad7a, #a3f7ca);
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: 0 4px 15px rgba(13, 173, 109, 0.6);
+      user-select: none;
+    }
+    button.submit-btn:hover {
+      background: linear-gradient(135deg, #a3f1f7, #0dad8a);
+      box-shadow: 0 6px 20px rgba(13, 173, 85, 0.8);
+    }
+    footer {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 500;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+      margin-top: 3rem;
+    }
+    .message {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      color: green;
+      font-weight: 600;
+    }
+    @media (max-width: 640px) {
+      h2 {
+        font-size: 2rem;
+      }
+      form {
+        padding: 1.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="events.html">Events</a>
+  <a href="workshops.html">Workshops</a>
+  <a href="collaborate.html">Collaborate</a>
+  <a href="support.html">Support Art</a>
+</nav>
+
+<header>
+  <h1>Deathhat Art Collection</h1>
+  <p>Expressing emotions through vibrant colors and textures</p>
+</header>
+
+<main>
+  <h2>Collaborate With Us</h2>
+  <p class="lead">
+    Join our art community and collaborate on exciting projects, exhibitions, and workshops. Share your passion and creativity with fellow artists.
+  </p>
+
+  <form id="collabForm">
+    <label for="name">Your Name</label>
+    <input type="text" id="name" name="name" required placeholder="Enter your full name" />
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" required placeholder="Enter your email" />
+
+    <label for="interest">Area of Interest</label>
+    <input type="text" id="interest" name="interest" required placeholder="e.g. Painting, Sculpture, Photography" />
+
+    <label for="message">Tell us about your collaboration idea</label>
+    <textarea id="message" name="message" rows="5" required placeholder="Describe your project or ideas here..."></textarea>
+
+    <button type="submit" class="submit-btn">Submit</button>
+  </form>
+  <div id="responseMsg" class="message"></div>
+</main>
+
+<footer>
+  &copy; 2025 Deathhat Art Collection. All rights reserved.
+</footer>
+
+<script>
+  document.getElementById('collabForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const responseMsg = document.getElementById('responseMsg');
+
+    // Simple form validation (already uses required)
+    const name = this.name.value.trim();
+    const email = this.email.value.trim();
+    const interest = this.interest.value.trim();
+    const message = this.message.value.trim();
+
+    if(!name || !email || !interest || !message) {
+      responseMsg.style.color = 'red';
+      responseMsg.textContent = 'Please fill in all fields before submitting.';
+      return;
+    }
+
+    // For now, just show a success message
+    responseMsg.style.color = 'green';
+    responseMsg.textContent = `Thank you, ${name}! We have received your collaboration request. We'll contact you soon.`;
+
+    this.reset();
+  });
+</script>
+
+</body>
+</html>

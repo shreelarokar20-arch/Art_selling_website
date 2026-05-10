@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Workshops | Deathhat Art Collection</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url("../images/background1.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      color: #0dad7d;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #a3f7d1;
+    }
+    nav {
+      background:#0dad62;
+      padding:1rem;
+      text-align:center;
+      opacity: 0.94;
+      position: relative;
+    }
+    nav a {
+      color:white;
+      margin: 0 1rem;
+      font-weight:700;
+      font-family: 'Poppins', sans-serif;
+      text-decoration:none;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    header {
+      background-color: rgba(31,41,55,.89);
+      color: #f9fafb;
+      text-align: center;
+      padding: 2rem 1rem;
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.15);
+      margin-bottom: 2rem;
+      border-radius: 0 0 24px 24px;
+      opacity: 0.98;
+    }
+    header h1 {
+      font-weight: 900;
+      font-size: 3rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.25rem;
+      font-family: 'Brush Script MT', cursive;
+      text-shadow: 0 2px 5px rgba(13, 173, 109, 0.7);
+    }
+    header p {
+      font-weight: 400;
+      font-size: 1.25rem;
+      letter-spacing: 0.7px;
+      opacity: 0.85;
+      font-style: italic;
+    }
+    main {
+      flex-grow: 1;
+      max-width: 960px;
+      margin: 2.5rem auto;
+      padding: 0 1rem;
+      background: rgba(255,255,255,0.77);
+      border-radius: 20px;
+      box-shadow: 0 6px 30px rgba(106, 13, 173, 0.08);
+    }
+    h2 {
+      font-size: 2.5rem;
+      color: #1f2937;
+      border-left: 6px solid #0dad55;
+      padding-left: 0.75rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+    }
+    .workshop-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(106, 13, 173, 0.1);
+      padding: 1.8rem 2rem;
+      margin-bottom: 1.8rem;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .workshop-card:hover {
+      box-shadow: 0 10px 30px rgba(106, 13, 173, 0.3);
+      transform: translateY(-5px);
+    }
+    .workshop-title {
+      color: #0dad7a;
+      font-weight: 700;
+      font-size: 1.7rem;
+      margin-bottom: 0.6rem;
+      font-family: 'Poppins', sans-serif;
+    }
+    .workshop-date {
+      font-weight: 600;
+      color: #4dbe9a;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .workshop-description {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.4;
+    }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(45deg, #0dad6d, #a3f7e6);
+      color: white;
+      padding: 0.75rem 1.75rem;
+      border: none;
+      border-radius: 25px;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(13, 173, 112, 0.6);
+      user-select: none;
+      margin-top: 1rem;
+    }
+    .btn:hover,
+    .btn:focus {
+      background: linear-gradient(135deg, #a3e5f7, #0da2ad);
+      box-shadow: 0 6px 20px rgba(13, 173, 146, 0.8);
+      outline: none;
+      text-decoration: none;
+    }
+    footer {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 500;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+      margin-top: 3rem;
+    }
+    @media (max-width: 640px) {
+      h2 {
+        font-size: 2rem;
+      }
+      .workshop-card {
+        padding: 1.2rem 1.5rem;
+      }
+      .workshop-title {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="events.html">Events</a>
+  <a href="workshops.html">Workshops</a>
+  <a href="collaborate.html">Collaborate</a>
+  <a href="support.html">Support Art</a>
+</nav>
+
+<header>
+  <h1>Deathhat Art Collection</h1>
+  <p>Expressing emotions through vibrant colors and textures</p>
+</header>
+
+<main>
+  <h2>Upcoming Workshops</h2>
+
+  <div class="workshop-card">
+    <div class="workshop-title">Watercolor Techniques for Beginners</div>
+    <div class="workshop-date">March 15, 2025</div>
+    <div class="workshop-description">
+      An introductory workshop focused on mastering basic watercolor painting techniques and color blending.
+    </div>
+    <a href="workshops.html#watercolor" class="btn">Learn More</a>
+  </div>
+
+  <div class="workshop-card">
+    <div class="workshop-title">Abstract Expressionism</div>
+    <div class="workshop-date">May 20 - May 22, 2025</div>
+    <div class="workshop-description">
+      Explore the world of abstract art, focusing on emotion and spontaneity through bold painting exercises.
+    </div>
+    <a href="workshops.html#abstract" class="btn">Learn More</a>
+  </div>
+
+  <div class="workshop-card">
+    <div class="workshop-title">Portrait Drawing Essentials</div>
+    <div class="workshop-date">July 10, 2025</div>
+    <div class="workshop-description">
+      Learn the fundamentals of portrait drawing, including proportion, shading, and capturing expressions.
+    </div>
+    <a href="workshops.html#portrait" class="btn">Learn More</a>
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 Deathhat Art Collection. All rights reserved.
+</footer>
+
+</body>
+</html>

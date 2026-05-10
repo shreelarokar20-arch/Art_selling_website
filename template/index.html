@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deathhat Art Collection | Online Art Seller</title>
+<style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url("../images/background.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      color: #0dad80;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #a3adf7;
+    }
+    nav {
+      background:#0dad78;
+      padding:1rem;
+      text-align:center;
+      opacity: 0.94;
+      position: relative;
+    }
+    nav a {
+      color:white;
+      margin: 0 1rem;
+      font-weight:700;
+      font-family: 'Poppins', sans-serif;
+      text-decoration:none;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    header {
+      background-color: rgba(31,41,55,.89);
+      color: #f9fafb;
+      text-align: center;
+      padding: 2rem 1rem;
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.15);
+      margin-bottom: 2rem;
+      border-radius: 0 0 24px 24px;
+      opacity: 0.98;
+    }
+    header h1 {
+      font-weight: 900;
+      font-size: 3rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.25rem;
+      font-family: 'Brush Script MT', cursive;
+      text-shadow: 0 2px 5px rgba(13, 173, 109, 0.7);
+    }
+    header p {
+      font-weight: 400;
+      font-size: 1.25rem;
+      letter-spacing: 0.7px;
+      opacity: 0.85;
+      font-style: italic;
+    }
+    main {
+      flex-grow: 1;
+      max-width: 960px;
+      margin: 2.5rem auto;
+      padding: 0 1rem;
+      background: rgba(255,255,255,0.77);
+      border-radius: 20px;
+      box-shadow: 0 6px 30px rgba(106, 13, 173, 0.08);
+    }
+    section {
+      margin-bottom: 4rem;
+    }
+    h2 {
+      font-size: 2.5rem;
+      color: #1f2937;
+      border-left: 6px solid #0dad90;
+      padding-left: 0.75rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-family: 'Poppins', sans-serif;
+    }
+    /* MODIFIED FOR HORIZONTAL SLIDER START */
+    .gallery-preview {
+      display: flex;
+      flex-direction: row;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scrollbar-color: #0dad9a #f1e9ff;
+      scrollbar-width: thin;
+    }
+    .gallery-item {
+      min-width: 200px;
+      max-width: 200px;
+      flex: 0 0 auto;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(13, 173, 66, 0.15);
+      overflow: hidden;
+      text-align: center;
+      position: relative; /* for z-index of hover */
+    }
+    /* Style for nicer scrollbar */
+    .gallery-preview::-webkit-scrollbar {
+      height: 10px;
+    }
+    .gallery-preview::-webkit-scrollbar-thumb {
+      background: #0dad85;
+      border-radius: 5px;
+    }
+    /* MODIFIED FOR HORIZONTAL SLIDER END */
+    .gallery-item a {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+    .gallery-item img {
+      max-width: 260px;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 3px solid #0dad8d;
+      border-radius: 11px 11px 0 0;
+      transition: transform 0.5s cubic-bezier(.22,.61,.36,1), box-shadow 0.35s;
+      box-shadow: 0 2px 16px 0 rgba(106, 13, 173, 0.10), 0 1.5px 4px 0 rgba(0,0,0,0.04);
+      will-change: transform, box-shadow;
+    }
+    .gallery-item:hover img,
+    .gallery-item:focus img {
+      transform: scale(1.09) rotate(-2deg);
+      box-shadow: 0 8px 28px 0 rgba(106, 13, 173, 0.17), 0 4px 12px 0 rgba(0,0,0,0.09);
+      outline: 3px solid #a3f7e6;
+      outline-offset: -7px;
+      z-index: 2;
+      filter: drop-shadow(0 0 16px #8be7d2b3);
+      transition: transform 0.5s cubic-bezier(.22,.61,.36,1), box-shadow 0.35s, filter 0.35s, outline 0.35s;
+    }
+    .gallery-item figcaption {
+      padding: 0.75rem;
+      font-weight: 700;
+      color: #555;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.3px;
+      background: #f1e9ff;
+      border-radius: 0 0 15px 15px;
+    }
+    /* Client reviews */
+    .reviews {
+      display: grid;
+      gap: 1.8rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    .review-card {
+      background-color: white;
+      padding: 1.5rem 2rem;
+      border-radius: 6px;
+      box-shadow: 0 6px 15px rgba(106, 13, 173, 0.15);
+      font-style: italic;
+      position: relative;
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+    .review-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 22px rgba(13, 173, 122, 0.3);
+    }
+    .review-card::before {
+      content: "“";
+      font-size: 4rem;
+      position: absolute;
+      top: 0.3rem;
+      left: 1rem;
+      color: #0dad80;
+      opacity: 0.3;
+    }
+    .review-name {
+      font-weight: 700;
+      margin-top: 1.2rem;
+      font-style: normal;
+      text-align: right;
+      color: #4dbea4;
+      letter-spacing: 0.7px;
+      font-family: 'Poppins', sans-serif;
+    }
+    /* Feature sections */
+    .feature-section {
+      background: #f1e9ff;
+      padding: 1.75rem 2rem;
+      border-radius: 15px;
+      box-shadow: 0 7px 20px rgba(106, 13, 173, 0.1);
+      margin-top: 2rem;
+    }
+    .feature-section h3 {
+      color: #4dbe9c;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.7px;
+    }
+    .feature-section p {
+      color: #3e7669;
+      font-weight: 500;
+      line-height: 1.45;
+      letter-spacing: 0.12em;
+    }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(45deg, #0dad58, #a3f7ed);
+      color: white;
+      padding: 0.75rem 1.75rem;
+      border: none;
+      border-radius: 25px;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(13, 173, 157, 0.6);
+      user-select: none;
+      margin-top: 0.75rem;
+    }
+    .btn:hover,
+    .btn:focus {
+      background: linear-gradient(135deg, #a3f6f7, #0dad78);
+      box-shadow: 0 6px 20px rgba(13, 173, 117, 0.8);
+      outline: none;
+      text-decoration: none;
+    }
+    footer {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 500;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+    }
+    @media (max-width: 640px) {
+      h2 {
+        font-size: 2rem;
+      }
+      .gallery-item {
+        width: 100%;
+      }
+      .reviews {
+        grid-template-columns: 1fr;
+      }
+      nav a {
+        display: inline-block;
+        margin: 0 0.5rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="events.html">Events</a>
+  <a href="workshops.html">Workshops</a>
+  <a href="collaborate.html">Collaborate</a>
+  <a href="support.html">Support Art</a>
+</nav>
+
+<header>
+  <h1>Deathhat Art Collection</h1>
+  <p>Expressing emotions through vibrant colors and textures</p>
+</header>
+<main>
+  <h2>Discover Our Gallery Collection</h2>
+  <p>Explore a diverse selection of art pieces that redefine creativity and imagination. You can also select and buy the art piece of your choice.</p>
+  <div id="categoryFilters" style="text-align:center; margin-bottom:1.5rem;">
+    <button class="category-btn active" data-filter="all" style="margin:0 0.5rem; padding:0.5rem 1rem; cursor:pointer; border:1px solid #0dad6d; border-radius:20px; background:#0dad58; color:#fff; font-weight:700;">All</button>
+    <button class="category-btn" data-filter="abstract" style="margin:0 0.5rem; padding:0.5rem 1rem; cursor:pointer; border:1px solid #0dad7d; border-radius:20px; background:#fff; color:#0dad60;">Abstract</button>
+    <button class="category-btn" data-filter="anime" style="margin:0 0.5rem; padding:0.5rem 1rem; cursor:pointer; border:1px solid #0dad65; border-radius:20px; background:#fff; color:#0dad6a;">Anime</button>
+    <button class="category-btn" data-filter="ink_art" style="margin:0 0.5rem; padding:0.5rem 1rem; cursor:pointer; border:1px solid #0dad60; border-radius:20px; background:#fff; color:#0dad70;">Ink art</button>
+    <button class="category-btn" data-filter="Real" style="margin:0 0.5rem; padding:0.5rem 1rem; cursor:pointer; border:1px solid #0dad60; border-radius:20px; background:#fff; color:#0dad70;">Real</button>
+  </div>
+
+</div>
+
+</div>
+
+
+  <div class="gallery-preview" id="gallery">
+  <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=Dead%20Rider&desc=An%20Rider%20skull%20master.&image=../images/art1.jpg&buylink=checkout.html?title=Ocean%20Breeze&image=../images/art1.jpg&price=150" tabindex="-1">
+        <img src="../images/art1.jpg" alt="Dead rider" />
+        <figcaption>Dead rider
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Wanted%20Luffy&desc=5th%20Gear%20Monkey%20D%20Luffy%20Wanted%20Poster.&image=../images/art2.jpg&buylink=checkout.html?title=Ocean%20Breeze&image=../images/art2.jpg&price=520" tabindex="-1">
+        <img src="../images/art2.jpg" alt="5th Gear Wanted" />
+        <figcaption>5th Gear Wanted
+          price="520"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Gohan%20X%20Videl&desc=Gohan%20videl%20Love.&image=../images/art3.jpg&buylink=checkout.html?title=Ocean%20Breeze&image../image/art3jpg&price=250" tabindex="-1">
+        <img src="../images/art3.jpg" alt="Dragon Ball" />
+        <figcaption>Dragon Ball
+          price="250"
+         </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=Horro520Hub&desc=Penniwies%20Terrifier%20combine%20art.&image=../images/art4.jpg&buylink=checkout.html?title=City%20Lights&image=../images/art4.jpg&price=600" tabindex="-1">
+        <img src="../images/art4.jpg" alt="Horror hub" />
+        <figcaption>Horror hub
+          Price="600"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=Sponge%20Bob&desc=Dead%20Imagination%20of%20Sponge%20bob.&image=../images/art5.jpg&buylink=checkout.html?title=City%20Lights%202&image=../images/art5.jpg&price=200" tabindex="-1">
+        <img src="../images/art5.jpg" alt="Sponge%20Bob" />
+        <figcaption>Sponge Bob
+          price="200"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=Optimus%20Prime&desc=The%20Leader%20of%20autobots&image=../images/art6.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art6.jpg&price=225" tabindex="-1">
+        <img src="../images/art6.jpg" alt="Optimus Prime" />
+        <figcaption>Optimus Prime
+          price="225"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Up&desc=Up%20where%20dream%20comes%20true.&image=../images/art7.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art7.jpg&price=150" tabindex="-1">
+        <img src="../images/art7.jpg" alt="Disney's Up" />
+        <figcaption>Disney's Up
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Gojo%20Satoro&desc=Curse%20Technique%20user.&image=../images/art8.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art8.jpg&price500" tabindex="-1">
+        <img src="../images/art8.jpg" alt="Gojo Satoro" />
+        <figcaption>Gojo Satoro
+          price="500"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=Moon Warrior&desc=Warrior%20Who%20shines%20in%20the%20darkness.&image=../images/art9.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art9.jpg&price=150" tabindex="-1">
+        <img src="../images/art9.jpg" alt="Moon Warrior" />
+        <figcaption>Moon Warrior
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Hiro%20X%20Zero2&desc=Darling%20in%20the%20Franxx.&image=../images/art10.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art10.jpg&price=150" tabindex="-1">
+        <img src="../images/art10.jpg" alt="Hiro X Zero2" />
+        <figcaption>Hiro X Zero2
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Inosuke%20Hasibira&desc=God%20of%20Mountains.&image=../images/art11.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art11.jpg%price=200" tabindex="-1">
+        <img src="../images/art11.jpg" alt="Inosuke Hasibira" />
+        <figcaption>Inosuke Hasibira
+          price="200"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Nezuko%20X%20Zenitsu&desc=Demon%20and%20demon%20Salyer.&image=../images/art12.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art12.jpg&price=225" tabindex="-1">
+        <img src="../images/art12.jpg" alt="Nezuko X Zenitsu" />
+        <figcaption>Nezuko X Zenitsu
+          price="225"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Tokito%20Muichiro&desc=Mist%20Hashira.&image=../images/art13.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art13.jpg&price=225" tabindex="-1">
+        <img src="../images/art13.jpg" alt="Tokito Muichiro" />
+        <figcaption>Tokito Muichiro</figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=shinobu X Yor&desc=Spy X Family VS Demon slayer.&image=../images/art14.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art14.jpg&price=500" tabindex="-1">
+        <img src="../images/art14.jpg" alt="Shinobu X Yor" />
+        <figcaption>Shinobu X Yor
+          price="500"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="Real">
+      <a href="product.html?title=Okarun&desc=Dandadan Beast.&image=../images/art15.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art15.jpg&price=225" tabindex="-1">
+        <img src="../images/art15.jpg" alt="Okarun" />
+        <figcaption>Okarun
+          price="225"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="Real">
+      <a href="product.html?title=Lionel Messi&desc=Argentina Footballer.&image=../images/art16.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art16.jpg&price=550" tabindex="-1">
+        <img src="../images/art16.jpg" alt="Lionel Messi" />
+        <figcaption>Lionel Messi
+          price="550"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="Real">
+      <a href="product.html?title=Albert Einstein&desc=Theoretical physicist.&image=../images/art17.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art17.jpg&price=600" tabindex="-1">
+        <img src="../images/art17.jpg" alt="Albert Einstein" />
+        <figcaption>Albert Einstein
+          price="600"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Ken Kanaki&desc=One eyeed Ghoul with multiple kagune.&image=../images/art18.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art18.jpg&price=300" tabindex="-1">
+        <img src="../images/art18.jpg" alt="ken kanaki" />
+        <figcaption>Ken Kanaki
+          price="300"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=Devil Skull&desc=The skull fall from the hell .&image=../images/art19.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art19.jpg&price=225" tabindex="-1">
+        <img src="../images/art19.jpg" alt="Hell Skull" />
+        <figcaption>Hell Skull
+          price="225"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+    <a href="product.html?title=Gokku Jr.&desc=Super saiyan 2 X Gohan.&image=../images/art20.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art20.jpg&price=250" tabindex="-1">
+        <img src="../images/art20.jpg" alt="Gohan" />
+        <figcaption>Gohan
+          price="250"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=Spidy&desc=Siperdam X dr.Cornus&image=../images/art21.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art21.jpg&price=150" tabindex="-1">
+        <img src="../images/art21.jpg" alt="Spidy X Lizard" />
+        <figcaption>Spidy X Lizard
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="Real">
+      <a href="product.html?title=Mike Tayson&desc=American former professional boxer.&image=../images/art22.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art22.jpg&price=500" tabindex="-1">
+        <img src="../images/art22.jpg" alt="Kid Dynamite" />
+        <figcaption>Kid Dynamite
+          price="500"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Goku&desc=awakened to emptiness or perceiving void.&image=../images/art23.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art23.jpg&price=225" tabindex="-1">
+        <img src="../images/art23.jpg" alt="Goku" />
+        <figcaption>Goku
+          price="225"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Rem&desc=abbreviation for rapid eye movement.&image=../images/art24.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art24.jpg&price=175" tabindex="-1">
+        <img src="../images/art24.jpg" alt="Rem" />
+        <figcaption>Rem
+          price="175"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=smoke flow&desc=The Last flow of smoke with love.&image=../images/art25.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art25.jpg&price=150" tabindex="-1">
+        <img src="../images/art25.jpg" alt="Smoke flow" />
+        <figcaption>Smoke flow
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Vegeta X bulmadesc=An highly intelligent women with a saiyan prince.&image=../images/art26.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art26.jpg&price=150" tabindex="-1">
+        <img src="../images/art26.jpg" alt="Vegeta X bulma" />
+        <figcaption>Vegeta X bulma
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Anya &desc=She is the adopted daughter of Loid and Yor Forger. She attends Eden Academy as a first-year student in Cecile Hall, Class 3..&image=../images/art27.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art27.jpg&price=175" tabindex="-1">
+        <img src="../images/art27.jpg" alt="Anya Forger" />
+        <figcaption>Anya Forger
+          price="175"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Robin &desc=The Boy of wonder.&image=../images/art28.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art28.jpg&price=200" tabindex="-1">
+        <img src="../images/art28.jpg" alt="Robin" />
+        <figcaption>Robin
+          price="200"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=Drago Chiken&desc=Dargon X chiken.&image=../images/art29.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art29.jpg&price=150" tabindex="-1">
+        <img src="../images/art29.jpg" alt="Drago Chiken" />
+        <figcaption>Drago chiken
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=Digital&desc=Digital like human heart.&image=../images/art30.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art30.jpg&price=150" tabindex="-1">
+        <img src="../images/art30.jpg" alt="Digital" />
+        <figcaption>Digital
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Inosuke&desc=Lord inosuke.&image=../images/art31.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art31.jpg&price=150" tabindex="-1">
+        <img src="../images/art31.jpg" alt="Inosuke" />
+        <figcaption>Inosuke
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Luffy&desc=Gum boy 5th gear monkey.&image=../images/art32.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art32.jpg&price=150" tabindex="-1">
+        <img src="../images/art32.jpg" alt="Luffy" />
+        <figcaption>Luffy
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Cry boy&desc=Screame of silence.&image=../images/art33.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art33.jpg&price=150" tabindex="-1">
+        <img src="../images/art33.jpg" alt="Cry Boy" />
+        <figcaption>Cry Boy
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=skeleton mewto&desc=Halloween pokemon theme.&image=../images/art34.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art34.jpgprice=175" tabindex="-1">
+        <img src="../images/art34.jpg" alt="Skeleton Mewto" />
+        <figcaption>Skeleton Mewto
+          price="175"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=Oggy and the Cockroches0&desc=Oggy X trio .&image=../images/art35.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art35.jpg&price=150" tabindex="-1">
+        <img src="../images/art35.jpg" alt="Oggy and the Cockroches" />
+        <figcaption>Oggy and the Cockroches
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Katsuki Bakugo&desc= Great Explosion Murder God Dynamight.&image=../images/art36.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art36.jpg&price=175" tabindex="-1">
+        <img src="../images/art36.jpg" alt="katsuki Bakugo" />
+        <figcaption>Katsuki Bakugo
+          price="175"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=aaaaateddy&desc=The honey lover.&image=../images/art37.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art37.jpg&price=150" tabindex="-1">
+        <img src="../images/art37.jpg" alt="Teddy" />
+        <figcaption>Teddy
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="Real">
+      <a href="product.html?title=Wild Robot&desc=Roz X Brightbill..&image=../images/art38.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art38.jpg&price=150" tabindex="-1">
+        <img src="../images/art38.jpg" alt="Wild robot" />
+        <figcaption>wild robot
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=mickey mouse&desc=Mouse of childhood.&image=../images/art39.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art39.jpg&price=125" tabindex="-1">
+        <img src="../images/art39.jpg" alt="Mickey mouse" />
+        <figcaption>mickey mouse
+          price="125"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Spiderman&desc=Powerful but weake in love.&image=../images/art40.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art40.jpg&price=150" tabindex="-1">
+        <img src="../images/art40.jpg" alt="Spiderman" />
+        <figcaption>Spiderman
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Sanemi&desc=Wind hashira.&image=../images/art41.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art41.jpg&price=125" tabindex="-1">
+        <img src="../images/art41.jpg" alt="Sanemi" />
+        <figcaption>Sanemi
+          price="125"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=Disney&desc=Disney side characters HUB.&image=../images/art42.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art42.jpg&price=125" tabindex="-1">
+        <img src="../images/art42.jpg" alt="Disney" />
+        <figcaption>Disney
+          price="125"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Tom and Jerry&desc=Tom X Jerry.&image=../images/art43.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art43.jpg&price=135" tabindex="-1">
+        <img src="../images/art43.jpg" alt="Tom and Jerry" />
+        <figcaption>Tom and Jerry
+          price="135"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Yuta Okkotsu&desc=Special grade curse user.&image=../images/art44.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art44.jpg&price=100" tabindex="-1">
+        <img src="../images/art44.jpg" alt="Yuta Okkotsu" />
+        <figcaption>Yuta Okkotsu
+          price="100"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Mask Man&desc=Sadness of smile.&image=../images/art45.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art45.jpg&price=100" tabindex="-1">
+        <img src="../images/art45.jpg" alt="Mask Man" />
+        <figcaption>Mask Man
+          price="100"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Gogeta&desc=Fusion Combination of goku and vegeta.&image=../images/art46.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art46.jpgprice=125" tabindex="-1">
+        <img src="../images/art46.jpg" alt="Gogeta" />
+        <figcaption>Gogeta
+          price="125"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Chifuyu&desc=Tokyo Manji Gang 1st Division Vice Captain.&image=../images/art47.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art47.jpg&price=125" tabindex="-1">
+        <img src="../images/art47.jpg" alt="Chifuyu" />
+        <figcaption>Chifuyu
+          price="125"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Trafalgar D. Water Law&desc=One piece Law.&image=../images/art48.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art48.jpg&price=150" tabindex="-1">
+        <img src="../images/art48.jpg" alt="Trafalgar D. Water Law" />
+        <figcaption>Trafalgar D. Water Law
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=Hunter&desc=Prey who become a predator.&image=../images/art49.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art49.jpg&price=125" tabindex="-1">
+        <img src="../images/art49.jpg" alt="Hunter" />
+        <figcaption>Hunter
+          price="125"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Sakura&desc=Wind breaker.&image=../images/art50.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art50.jpg&price=125" tabindex="-1">
+        <img src="../images/art50.jpg" alt="Sakura" />
+        <figcaption>Sakura
+          Price="125"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Ino&desc=Soul Shifter Baddie.&image=../images/art51.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art51.jpg&price=100" tabindex="-1">
+        <img src="../images/art51.jpg" alt="Ino" />
+        <figcaption>Ino
+          price="100"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Danzai&desc=Wlof with Sheep Face.&image=../images/art52.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art52.jpg&price=150" tabindex="-1">
+        <img src="../images/art52.jpg" alt="Danzai" />
+        <figcaption>Danzai
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="abstract">
+      <a href="product.html?title=Bunny Girl&desc=Not Senpai just bunny.&image=../images/art53.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art53.jpg&price=150" tabindex="-1">
+        <img src="../images/art53.jpg" alt="Bunny Girl" />
+        <figcaption>Bunny Girl
+          price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Midoriya X Almight&desc=One for all.&image=../images/art54.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art54.jpg&price175" tabindex="-1">
+        <img src="../images/art54.jpg" alt="Midoriya X Almight" />
+        <figcaption>Midoriya X Almight
+          price="175"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Bunny&desc=Bunny Of DC&image=../images/art55.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art55.jpg&price=150" tabindex="-1">
+        <img src="../images/art55.jpg" alt="Bunny" />
+        <figcaption>Bunny
+          Price="150"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="ink_art">
+      <a href="product.html?title=Wizard&desc=Wizard if magic.&image=../images/art56.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art56.jpg&price=125" tabindex="-1">
+        <img src="../images/art56.jpg" alt="Wizard" />
+        <figcaption>Wizard
+          price="125"
+        </figcaption>
+      </a>
+    </figure>
+    <figure class="gallery-item" tabindex="0" data-category="anime">
+      <a href="product.html?title=Ace&desc=Fire Of One Piece.&image=../images/art57.jpg&buylink=checkout.html?title=City%20Lights%203&image=../images/art57.jpg&price=175" tabindex="-1">
+        <img src="../images/art57.jpg" alt="Ace" />
+        <figcaption>Ace
+          Price="175"
+        </figcaption>
+      </a>
+    </figure>
+    <!-- Add more gallery items similarly with correct data-category and matching image & href URLs -->
+  </div>
+
+  <section>
+    <h2>Client Reviews</h2>
+    <div class="reviews">
+      <div class="review-card" tabindex="0">
+        Truly captures the essence of nature and emotion.
+        <div class="review-name">Mark Lee</div>
+      </div>
+      <div class="review-card" tabindex="0">
+        A must-have for art enthusiasts.
+        <div class="review-name">Lila Rodriguez</div>
+      </div>
+      <div class="review-card" tabindex="0">
+        Brings life to any interior space.
+        <div class="review-name">Emily Chen</div>
+      </div>
+      <div class="review-card" tabindex="0">
+        Exceptional craftsmanship and passion.
+        <div class="review-name">David Patel</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Engage With Us</h2>
+    <div class="feature-section">
+      <h3>Artistic Workshops</h3>
+      <p>Stay updated on upcoming exhibitions and art showcases that celebrate talent and innovation.</p>
+      <a href="events.html" class="btn">Explore Events</a>
+    </div>
+    <div class="feature-section">
+      <h3>Collaborate With Us</h3>
+      <p>Learn new techniques and skills in our interactive workshops led by experienced artists.</p>
+      <a href="workshops.html" class="btn">Join a Workshop</a>
+    </div>
+    <div class="feature-section">
+      <h3>Community Projects</h3>
+      <p>Create together! Collaborate on projects that push boundaries and ignite passion.</p>
+      <a href="collaborate.html" class="btn">Collaborate Now</a>
+    </div>
+    <div class="feature-section">
+      <h3>Support Local Artists</h3>
+      <p>Engage in community initiatives that use art as a catalyst for positive change and social impact.</p>
+      <a href="support.html" class="btn">Support Art</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Deathhat Art Collection. All rights reserved.
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.category-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.style.background = '#fff';
+          btn.style.color = '#6a0dad';
+        });
+
+        // Add active class and style for clicked button
+        button.classList.add('active');
+        button.style.background = '#6a0dad';
+        button.style.color = '#fff';
+
+        const filter = button.getAttribute('data-filter');
+
+        galleryItems.forEach(item => {
+          const category = item.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+</body>
+</html>

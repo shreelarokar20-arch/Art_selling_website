@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Events | Deathhat Art Collection</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url("../images/background.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    nav {
+      background: #0dad82;
+      padding: 1rem;
+      text-align: center;
+      opacity: 0.94;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    }
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      text-decoration: underline;
+      color: #b6ffee;
+    }
+    header {
+      background-color: rgba(31,41,55,0.95);
+      color: #f9fafb;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-bottom: 2rem;
+      border-radius: 0 0 30px 30px;
+      opacity: 0.98;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      user-select: none;
+    }
+    header h1 {
+      font-weight: 900;
+      font-size: 3rem;
+      font-family: 'Brush Script MT', cursive;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 3px 7px rgba(13, 173, 98, 0.75);
+    }
+    header p {
+      font-weight: 500;
+      font-size: 1.3rem;
+      letter-spacing: 0.8px;
+      opacity: 0.9;
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto;
+      user-select: none;
+    }
+    main {
+      flex-grow: 1;
+      max-width: 960px;
+      margin: 0 auto 3rem auto;
+      padding: 1rem 2rem 3rem 2rem;
+      background: rgba(255, 255, 255, 0.4); /* updated transparency */
+      border-radius: 25px;
+      box-shadow: 0 15px 45px rgba(106,13,173,0.15);
+      user-select: none;
+    }
+    h2 {
+      font-size: 2.75rem;
+      color: #1f2937;
+      border-left: 8px solid #0dad80;
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      font-family: 'Poppins', sans-serif;
+      user-select: text;
+    }
+    p {
+      font-size: 1.15rem;
+      line-height: 1.5;
+      color: #3f6e5d;
+      margin-bottom: 1.8rem;
+      user-select: text;
+    }
+    .event-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .event-item {
+      background: #f9f3ff;
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 6px 22px rgba(106, 13, 173, 0.12);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      cursor: default;
+    }
+    .event-item:hover {
+      box-shadow: 0 12px 40px rgba(106, 13, 173, 0.28);
+      transform: translateY(-5px);
+    }
+    .event-title {
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: #57c2a5;
+      margin-bottom: 0.4rem;
+      font-family: 'Poppins', sans-serif;
+      user-select: text;
+    }
+    .event-date {
+      font-weight: 700;
+      color: #6cd1b4;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.1em;
+      font-family: 'Poppins', sans-serif;
+      user-select: text;
+    }
+    .event-description {
+      font-weight: 600;
+      color: #3e7665;
+      line-height: 1.5;
+      user-select: text;
+    }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #6fffab, #0dad55);
+      color: white;
+      padding: 0.8rem 2.4rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 900;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(13, 173, 120, 0.7);
+      user-select: none;
+      font-size: 1.05rem;
+      margin-top: 1rem;
+      letter-spacing: 1.2px;
+    }
+    .btn:hover,
+    .btn:focus {
+      background: linear-gradient(45deg, #a3f7e3, #0dad68);
+      box-shadow: 0 9px 32px rgba(13, 173, 98, 0.95);
+      outline: none;
+      text-decoration: none;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(6px);
+    }
+    .modal-content {
+      background: #fff;
+      padding: 2.5rem 2rem;
+      border-radius: 25px;
+      max-width: 450px;
+      box-shadow: 0 15px 45px rgba(106, 13, 173, 0.28);
+      position: relative;
+      font-size: 1.15rem;
+      color: #3a266b;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      cursor: pointer;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0dad55;
+      user-select: none;
+      transition: color 0.25s ease;
+    }
+    .modal-close:hover {
+      color: #80ffee;
+    }
+    .modal h2 {
+      margin-top: 0;
+      font-weight: 900;
+      color: #5edea7;
+      font-size: 2rem;
+      user-select: text;
+      letter-spacing: 1px;
+    }
+    @media (max-width: 700px) {
+      main {
+        padding: 1rem 1.2rem 2rem 1.2rem;
+        border-radius: 20px;
+      }
+      h2 {
+        font-size: 2rem;
+        padding-left: 0.8rem;
+      }
+      header h1 {
+        font-size: 2.3rem;
+      }
+      header p {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="events.html">Events</a>
+    <a href="workshops.html">Workshops</a>
+    <a href="collaborate.html">Collaborate</a>
+    <a href="support.html">Support Art</a>
+  </nav>
+
+  <header>
+    <h1>Upcoming Events</h1>
+    <p>Discover the latest exhibitions, workshops, and community projects brought to you by Deathhat Art Collection.</p>
+  </header>
+
+  <main>
+    <h2>Art Events Calendar</h2>
+    <ul class="event-list">
+      <li class="event-item">
+        <div class="event-title">Spring Art Expo 2026</div>
+        <div class="event-date">April 7th - 12th, 2026</div>
+        <div class="event-description">
+          Celebrate the vibrant creativity of local artists in our annual Spring Art Expo featuring live demonstrations, workshops, and gallery tours. Open to all art lovers and supporters.
+        </div>
+        <button class="btn" id="springExpoBtn" aria-label="Learn more about Spring Art Expo 2026">
+          Learn More
+        </button>
+      </li>
+      <li class="event-item">
+        <div class="event-title">Summer Art Workshops</div>
+        <div class="event-date">June 15th - 25th, 2026</div>
+        <div class="event-description">
+          Join interactive workshops taught by professional artists. Improve your skills in painting, digital art, and mixed media. Suitable for all levels.
+        </div>
+        <a href="workshops.html" class="btn" aria-label="Learn more about Summer Art Workshops">Learn More</a>
+      </li>
+      <li class="event-item">
+        <div class="event-title">Urban Mural Project</div>
+        <div class="event-date">September 10th - 20th, 2026</div>
+        <div class="event-description">
+          Collaborate with local artists to create inspiring murals across the city. Community participation encouraged. The project promotes social messages through vibrant art.
+        </div>
+        <a href="collaborate.html" class="btn" aria-label="Join the Urban Mural Project">Get Involved</a>
+      </li>
+      <li class="event-item">
+        <div class="event-title">Holiday Art Fair</div>
+        <div class="event-date">December 1st - 5th, 2026</div>
+        <div class="event-description">
+          Shop unique gifts and support local artists at our annual Holiday Art Fair with live music and art demonstrations. Family-friendly event.
+        </div>
+        <button class="btn" id="holidayFairBtn" aria-label="Learn more about Holiday Art Fair">Learn More</button>
+      </li>
+    </ul>
+  </main>
+
+  <!-- Spring Art Expo Modal -->
+  <div id="springExpoModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="springExpoTitle" tabindex="-1">
+    <div class="modal-content">
+      <span class="modal-close" id="closeSpringExpo" role="button" tabindex="0" aria-label="Close Spring Art Expo details">&times;</span>
+      <h2 id="springExpoTitle">Spring Art Expo 2026</h2>
+      <p>
+        The Spring Art Expo is your chance to see new works from both emerging and established local artists.<br />
+        <strong>Dates:</strong> April 7th – 12th, 2026<br />
+        <strong>Venue:</strong> City Art Hall, Downtown<br />
+        Includes workshops, guided tours, and artist Q&amp;A sessions.<br /><br />
+        <strong>How to Participate:</strong> Visit, register for events, or submit your own work.<br />
+        <strong>Contact us</strong> for more info or volunteering opportunities!
+      </p>
+    </div>
+  </div>
+
+  <!-- Holiday Art Fair Modal -->
+  <div id="holidayFairModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="holidayFairTitle" tabindex="-1">
+    <div class="modal-content">
+      <span class="modal-close" id="closeHolidayFair" role="button" tabindex="0" aria-label="Close Holiday Art Fair details">&times;</span>
+      <h2 id="holidayFairTitle">Holiday Art Fair 2026</h2>
+      <p>
+        Celebrate the end of the year with our Holiday Art Fair featuring unique gifts made by local artists.<br />
+        <strong>Dates:</strong> December 1st – 5th, 2026<br />
+        Enjoy live music, art demonstrations, and family-friendly activities.<br /><br />
+        <strong>Visit us</strong> and find the perfect holiday gift while supporting the creative community.
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Deathhat Art Collection. All rights reserved.
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const springExpoBtn = document.getElementById('springExpoBtn');
+      const springExpoModal = document.getElementById('springExpoModal');
+      const closeSpringExpo = document.getElementById('closeSpringExpo');
+
+      const holidayFairBtn = document.getElementById('holidayFairBtn');
+      const holidayFairModal = document.getElementById('holidayFairModal');
+      const closeHolidayFair = document.getElementById('closeHolidayFair');
+
+      // Show modals on button click
+      springExpoBtn.onclick = () => {
+        springExpoModal.style.display = 'flex';
+        springExpoModal.focus();
+      };
+      holidayFairBtn.onclick = () => {
+        holidayFairModal.style.display = 'flex';
+        holidayFairModal.focus();
+      };
+
+      // Close modals on close button click
+      closeSpringExpo.onclick = () => {
+        springExpoModal.style.display = 'none';
+        springExpoBtn.focus();
+      };
+      closeHolidayFair.onclick = () => {
+        holidayFairModal.style.display = 'none';
+        holidayFairBtn.focus();
+      };
+
+      // Close on outside click
+      springExpoModal.onclick = e => {
+        if (e.target === springExpoModal) {
+          springExpoModal.style.display = 'none';
+          springExpoBtn.focus();
+        }
+      };
+      holidayFairModal.onclick = e => {
+        if (e.target === holidayFairModal) {
+          holidayFairModal.style.display = 'none';
+          holidayFairBtn.focus();
+        }
+      };
+
+      // Close on Escape key press
+      document.addEventListener('keydown', e => {
+        if(e.key === 'Escape'){
+          if (springExpoModal.style.display === 'flex') {
+            springExpoModal.style.display = 'none';
+            springExpoBtn.focus();
+          }
+          if (holidayFairModal.style.display === 'flex') {
+            holidayFairModal.style.display = 'none';
+            holidayFairBtn.focus();
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout - Deathhat Art Collection</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url("../images/background.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      padding: 2rem;
+      max-width: 450px;
+      margin: 2rem auto;
+      background: rgba(255,255,255,0.85);
+      border-radius: 15px;
+      box-shadow: 0 6px 25px rgba(106,13,173,0.2);
+      text-align: center;
+    }
+    h2 {
+      color: #6a0dad;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+    .product-info {
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: #5a3e76;
+    }
+    img.product-image {
+      max-width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(106, 13, 173, 0.2);
+      margin-bottom: 1.5rem;
+    }
+    label {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+      color: #7a57c2;
+      letter-spacing: 0.07em;
+      text-align: left;
+    }
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 10px;
+      border: 1.5px solid #b7a9e5;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+    }
+    button {
+      background: linear-gradient(45deg, #6a0dad, #c4a3f7);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 0.75rem 2rem;
+      font-weight: 900;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 6px 18px rgba(106, 13, 173, 0.33);
+      transition: background 0.3s;
+      margin-top: 0.75rem;
+    }
+    button:hover {
+      background: linear-gradient(135deg, #c4a3f7, #6a0dad);
+    }
+    .confirmation {
+      margin-top: 1.5rem;
+      font-weight: 700;
+      color: #317531;
+      font-size: 1.1rem;
+      text-align: center;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Checkout</h2>
+
+  <!-- Product Image Preview -->
+  <img id="productImage" class="product-image" src="" alt="Product Image" />
+
+  <div class="product-info" id="productInfo">
+    Loading product details...
+  </div>
+
+  <form id="checkoutForm">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" required placeholder="Your full name" />
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" required placeholder="Your email address" />
+
+    <button type="submit">Confirm Purchase</button>
+  </form>
+
+  <div class="confirmation" id="confirmationMessage">
+    Thank you for your purchase! We will email your receipt shortly.
+  </div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  // Decode URL params safely
+  function decodeParam(param) {
+    if (!param) return '';
+    return decodeURIComponent(param.replace(/\+/g, ' '));
+  }
+
+  const titleRaw = params.get('title') || 'Unknown Product';
+  const priceRaw = params.get('price') || '0.00';
+  const imageRaw = params.get('image') || '';
+
+  const title = decodeParam(titleRaw);
+  const price = decodeParam(priceRaw);
+  const imageSrc = decodeParam(imageRaw);
+
+  const productImage = document.getElementById('productImage');
+  if(imageSrc) {
+    productImage.src = imageSrc;
+    productImage.alt = title;
+  } else {
+    productImage.style.display = 'none';
+  }
+
+  const productInfoDiv = document.getElementById('productInfo');
+  productInfoDiv.textContent = `${title} — Price: ₹$${price}`;
+
+  const form = document.getElementById('checkoutForm');
+  const confirmationMsg = document.getElementById('confirmationMessage');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    form.style.display = 'none';
+    confirmationMsg.style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
